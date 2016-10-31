@@ -189,7 +189,7 @@ export default Component.extend({
         this.set('selection', value);
         this.sendAction('action', value);
       } else if (model !== null && typeof model === 'object') {
-        this.get('_typeahead').typeahead('val', null);
+        this.setValue(model);
       } else {
         this.get('_typeahead').typeahead('val', null);
       }
