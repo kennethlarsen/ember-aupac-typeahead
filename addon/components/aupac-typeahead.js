@@ -188,10 +188,10 @@ export default Component.extend({
         const value = this.get('_typeahead').typeahead('val');
         this.set('selection', value);
         this.sendAction('action', value);
-      } else if (model) {
+      } else if (model !== null && typeof model === 'object') {
         this.setValue(model);
       } else {
-          this.setValue(null);
+        this.get('_typeahead').typeahead('val', null);
       }
     }));
 
