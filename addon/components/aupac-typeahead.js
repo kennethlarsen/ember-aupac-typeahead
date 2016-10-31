@@ -37,6 +37,7 @@ export default Component.extend({
   async : false, //@public
   datasetName : '', //@public
   allowFreeInput: false, //@public
+  allowCharacterDeletion: false, //@public
 
   //HtmlBars Templates
   suggestionTemplate,  //@public
@@ -70,16 +71,14 @@ export default Component.extend({
    * @public
    * @param selection the item selected by the user
    */
-  setValue : function(selection) {
-    if (this.get('_typeahead')) { // Was failing in tests with this probably due to a stray observer
-      selection = this.get('transformSelection')(selection);
-      if(selection) {
-        this.get('_typeahead').typeahead('val', selection);
-      } else {
-        this.get('_typeahead').typeahead('val', '');
-      }
-    }
-  },
+   setValue : function(selection) {
+     selection = this.transformSelection(selection);
+     if(selection) {
+       this.get('_typeahead').typeahead('val', selection);
+     } else if (!this.get('allowCharacterDeletion')) {
+       this.get('_typeahead').typeahead('val', '');
+     }
+   },
 
   didInsertElement: function () {
     this._super(...arguments);
