@@ -72,13 +72,15 @@ export default Component.extend({
    * @param selection the item selected by the user
    */
    setValue : function(selection) {
-     selection = this.transformSelection(selection);
-     if(selection) {
-       this.get('_typeahead').typeahead('val', selection);
-     } else if (!this.get('allowCharacterDeletion')) {
-       this.get('_typeahead').typeahead('val', '');
+     if (this.get('_typeahead')) { // Was failing in tests with this probably due to a stray observer
+       selection = this.transformSelection(selection);
+       if(selection) {
+         this.get('_typeahead').typeahead('val', selection);
+       } else if (!this.get('allowCharacterDeletion')) {
+         this.get('_typeahead').typeahead('val', '');
+         }
+       },
      }
-   },
 
   didInsertElement: function () {
     this._super(...arguments);
