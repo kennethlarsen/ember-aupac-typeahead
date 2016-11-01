@@ -79,8 +79,8 @@ export default Component.extend({
        } else if (!this.get('allowCharacterDeletion')) {
          this.get('_typeahead').typeahead('val', '');
          }
-       },
-     }
+       }
+     },
 
   didInsertElement: function () {
     this._super(...arguments);
